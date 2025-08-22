@@ -78,43 +78,45 @@ const Signup = () => {
   }
 
   return (
-    <div className='flex flex-col min-h-screen items-center justify-items-center bg-white'>
-      <img className='mt-[15vh]' src={Logo} alt='Logo' />
-      <img className='mt-[3.08vh]' src={SignupImg} alt='SignupImg' />
-      <form
-        onSubmit={(e) => {
-          e.preventDefault() // 새로고침 방지!
-          postSignupRequest()
-        }}
-      >
-        <div className='flex flex-col gap-[0.83vh] mt-0'>
-          <AuthBox2
-            label={'이메일'}
-            bg={emailBtnBg}
-            name='email'
-            onClick={handleEmailChecked}
-            value={values.email}
-            onChange={handleChange}
-          />
-          <AuthBox
-            label={'비밀번호'}
-            name='password'
-            value={values.password}
-            onChange={handleChange}
-          />
-          <AuthBox2
-            label={'닉네임'}
-            name='nickname'
-            bg={nicknameBtnBg}
-            onClick={handleNicknamChecked}
-            value={values.nickname}
-            onChange={handleChange}
-          />
-        </div>
-        <div className='mt-[4.74vh]'>
-          <AuthBtn text={'회원가입 완료하기'} disabled={!canSubmit} onClick={postSignupRequest} />
-        </div>
-      </form>
+    <div className='flex items-center justify-center'>
+      <div className='flex flex-col min-h-screen items-center justify-center bg-white w-full max-w-[768px]'>
+        <img className='mt-[6.5vh]' src={Logo} alt='Logo' />
+        <img className='mt-[3.08vh]' src={SignupImg} alt='SignupImg' />
+        <form
+          onSubmit={(e) => {
+            e.preventDefault() // 새로고침 방지!
+            postSignupRequest()
+          }}
+        >
+          <div className='flex flex-col justify-center items-center gap-[0.83vh] mt-0'>
+            <AuthBox2
+              label={'이메일'}
+              bg={emailBtnBg}
+              name='email'
+              onClick={handleEmailChecked}
+              value={values.email}
+              onChange={handleChange}
+            />
+            <AuthBox
+              label={'비밀번호'}
+              name='password'
+              value={values.password}
+              onChange={handleChange}
+            />
+            <AuthBox2
+              label={'닉네임'}
+              name='nickname'
+              bg={nicknameBtnBg}
+              onClick={handleNicknamChecked}
+              value={values.nickname}
+              onChange={handleChange}
+            />
+          </div>
+          <div className='pt-[4.74vh] pb-[4vh]'>
+            <AuthBtn text={'회원가입 완료하기'} disabled={!canSubmit} onClick={postSignupRequest} />
+          </div>
+        </form>
+      </div>
     </div>
   )
 }

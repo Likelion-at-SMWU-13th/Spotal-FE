@@ -19,7 +19,7 @@ const CommunityPostList = () => {
         console.log(res.data.message)
         console.log(res.data.data)
         const posts = Array.isArray(res.data?.data) ? res.data.data : []
-        setPostData(posts.slice().reverse())
+        setPostData(posts)
       })
       .catch((err) => {
         console.log(err)
@@ -32,24 +32,26 @@ const CommunityPostList = () => {
   }, [])
 
   return (
-    <div>
-      <Header2 label1={'피드'} label2={'내 글 모음'} link={'/mypost'} />
-      <div className='px-[10.769vw] pt-[7.11vh] pb-[10vh] bg-white'>
-        <div className='flex justify-between my-[2.49vh]'>
-          <div className='flex gap-[1.54vw] '>
-            <Dropdown label={'감정'} />
-            <Dropdown label={'동네'} />
+    <div className='flex flex-col items-center justify-center '>
+      <div className='max-w-[768px] w-full flex flex-col items-center justify-center bg-white'>
+        <Header2 label1={'피드'} label2={'내 글 모음'} link={'/mypost'} />
+        <div className='pt-[7.11vh] pb-[10vh] bg-white min-h-screen'>
+          <div className='flex justify-between my-[2.49vh]'>
+            <div className='flex gap-[1.54vw] '>
+              <Dropdown label={'감정'} />
+              <Dropdown label={'동네'} />
+            </div>
+            <button
+              className='w-[18.72vw] max-w-[6rem] h-[1.5rem] bg-primary-300 border-primary border-[0.5px] rounded-[5px] font-[SemiBold] text-[12px] text-primary'
+              onClick={() => navigate('/writepage')}
+            >
+              새 글 작성
+            </button>
           </div>
-          <button
-            className='w-[18.72vw] h-[3.08vh] bg-primary-300 border-primary border-[0.5px] rounded-[5px] font-[SemiBold] text-[12px] text-primary'
-            onClick={() => navigate('/writepage')}
-          >
-            새 글 작성
-          </button>
+          <PostList postData={postData} />
         </div>
-        <PostList postData={postData} />
+        <Footer selectedMenu={'community'} />
       </div>
-      <Footer selectedMenu={'community'} />
     </div>
   )
 }

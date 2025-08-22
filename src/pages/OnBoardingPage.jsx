@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ProgressBar from '@/components/onboarding/ProgressBar.jsx'
 import OnBoarding1 from '../assets/OnBoarding1.svg'
 import OnBoarding2 from '../assets/OnBoarding2.svg'
@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom'
 const OnBoardingPage = () => {
   const [step, setStep] = useState(0)
   const navigate = useNavigate()
+  const [imgLoaded, setImgLoaded] = useState(false)
 
   const steps = [
     { question: '골목에서 좋아하던 가게가 <br/> 사라진 걸 깨달은 적 있나요?', image: OnBoarding1 },
@@ -23,6 +24,22 @@ const OnBoardingPage = () => {
       image: OnBoarding3,
     },
   ]
+
+  useEffect(() => {
+    setImgLoaded(false)
+    const src = steps[step].image
+    const img = new Image()
+    img.src = src
+    if (img.decode) {
+      img
+        .decode()
+        .catch(() => {})
+        .finally(() => setImgLoaded(true))
+    } else {
+      img.onload = () => setImgLoaded(true)
+      img.onerror = () => setImgLoaded(true)
+    }
+  }, [step, steps])
 
   const nextStep = () => {
     if (step < steps.length - 1) {
@@ -45,27 +62,29 @@ const OnBoardingPage = () => {
   }
 
   return (
-    <>
+    <div className='flex flex-col justify-center items-center bg-white max-w-[768px] mx-auto min-h-screen overflow-auto max-h-[100vh] scrollbar-hide'>
       <ProgressBar step={step} totalSteps={steps.length} onBack={prevStep} />
       <div className='flex flex-col min-h-screen items-center justify-items-center bg-white'>
         <p
-          className='font-[SemiBold] text-grey-700 mt-[17%] text-xl text-center'
+          className='font-[SemiBold] text-grey-700 mt-[27%] text-xl text-center'
           dangerouslySetInnerHTML={{ __html: steps[step].question }}
         />
         <div className='absolute top-[39.9vh] w-[76.9vw] h-[35.54vh] left-1/2 -translate-x-1/2'>
-          <div className='absolute mt-[50px] w-[60vw] h-[25vh] inset-0 -z-10 bg-primary-200 blur-[9rem] rounded-full pointer-events-none' />
+          <div className='absolute mt-[50px] w-[70vw] md:w-[30rem] left-1/2 -translate-x-1/2 h-[25vh] inset-0 -z-10 bg-primary-200 md:blur-[7rem] blur-[5rem] rounded-full pointer-events-none animate-pulse bg-gradient-to-b from-primary-200 to-primary' />
           <img
             className='relative z-10 w-full h-full object-contain'
             src={steps[step].image}
             alt='온보딩 캐릭터'
+            loading='eager'
+            decoding='async'
           />
         </div>
       </div>
-      <div className='absolute bottom-[11.14vh] flex justify-between w-full px-[6.67vw]'>
+      <div className='absolute bottom-[9.5vh] flex max-w-[768px] md:gap-[20rem] gap-[45vw] px-[6.67vw]'>
         <FooterBtn onClick={goToLogin} text={'건너뛰기'} />
         <FooterBtn onClick={nextStep} text={step < steps.length - 1 ? '다음' : '시작하기'} />
       </div>
-    </>
+    </div>
   )
 }
 

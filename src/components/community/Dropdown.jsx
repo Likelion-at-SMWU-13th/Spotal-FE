@@ -2,16 +2,23 @@ import React, { useState, useEffect, useRef } from 'react'
 import DropdownSign from '@/assets/DropdownSign.svg'
 import { useOutsideClick } from '@/hooks/useOutsideClick.jsx'
 
-export const emotionList = ['전체', '정겨움', '편안함', '조용함', '활기참', '소박함', '세심함']
+export const emotionList = [
+  { emotion_id: 1, name: '정겨움' },
+  { emotion_id: 2, name: '편안함' },
+  { emotion_id: 3, name: '조용함' },
+  { emotion_id: 4, name: '활기참' },
+  { emotion_id: 5, name: '소박함' },
+  { emotion_id: 6, name: '세심함' },
+]
+
 export const locationList = [
-  '전체',
-  '이태원',
-  '한남동',
-  '후암동',
-  '효창동',
-  '용문동',
-  '청파동',
-  '해방촌',
+  { location_id: 1, name: '이태원' },
+  { location_id: 2, name: '한남동' },
+  { location_id: 3, name: '후암동' },
+  { location_id: 4, name: '효창동' },
+  { location_id: 5, name: '용문동' },
+  { location_id: 6, name: '청파동' },
+  { location_id: 7, name: '해방촌' },
 ]
 
 const Dropdown = ({ label }) => {
@@ -26,9 +33,9 @@ const Dropdown = ({ label }) => {
 
   let options = []
   if (label === '감정') {
-    options = emotionList
+    options = emotionList.map((e) => e.name)
   } else if (label === '동네') {
-    options = locationList
+    options = locationList.map((l) => l.name)
   }
 
   return (
@@ -38,14 +45,26 @@ const Dropdown = ({ label }) => {
         onClick={() => {
           setOpen((o) => !o)
         }}
-        className={`flex items-center justify-center w-[18.72vw] h-[3.08vh] bg-grey-100 cursor-pointer rounded-[5px] font-[SemiBold] text-[12px] text-grey-700 ${filtered ? 'bg-primary-300' : 'bg-grey-100'}`}
+        className={`flex items-center justify-center w-[18.72vw] max-w-[6rem] h-[1.5rem] bg-grey-100 cursor-pointer rounded-[5px] font-[SemiBold] text-[12px] text-grey-700 ${filtered ? 'bg-primary-300' : 'bg-grey-100'}`}
       >
         {displayLabel}
         <img src={DropdownSign} />
       </button>
 
       {open && (
-        <div className='flex flex-col bg-grey-100 rounded-[10px] w-[18.72vw] mt-[1px] font-[SemiBold] text-[0.625rem] text-grey-700 overflow-hidden absolute top-full left-0 z-40'>
+        <div className='flex flex-col bg-grey-100 rounded-[10px] w-[18.72vw] max-w-[6rem] mt-[1px] font-[SemiBold] text-[0.625rem] text-grey-700 overflow-hidden absolute top-full left-0 z-40'>
+          <button
+            className={`hover:bg-primary-300 p-[5px] active:bg-primary-300 ${
+              selected === '전체' ? 'bg-primary-300' : 'bg-grey-100'
+            }`}
+            onClick={() => {
+              setDisplayLabel(label)
+              setFiltered(false)
+              setOpen(false)
+            }}
+          >
+            전체
+          </button>
           {options.map((opt) => (
             <button
               className={`hover:bg-primary-300 p-[5px] active:bg-primary-300 ${
@@ -53,14 +72,9 @@ const Dropdown = ({ label }) => {
               }`}
               key={opt}
               onClick={() => {
-                if (opt === '전체') {
-                  setDisplayLabel(label)
-                  setFiltered(false)
-                } else {
-                  setDisplayLabel(opt)
-                  setFiltered(true)
-                }
-                // setOpen(false)
+                setDisplayLabel(opt)
+                setFiltered(true)
+                setOpen(false)
                 setSelected(opt)
               }}
             >

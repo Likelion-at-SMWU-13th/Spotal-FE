@@ -1,4 +1,3 @@
-import React from 'react'
 import Return from '../../assets/return.svg'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -7,7 +6,7 @@ const Header2 = ({ label1, label2, link }) => {
 
   return (
     <div>
-      <div className='fixed top-0 z-50 text-[#364153] bg-white flex items-center w-[100vw] h-[7.11vh] border-b-[1px] border-b-grey-100 shadow-[0_2px_2px_#EFEFEF] left-1/2 -translate-x-1/2'>
+      <div className='fixed top-0 z-50 text-[#364153] bg-white flex items-center w-full max-w-[768px] h-[7.11vh] border-b-[1px] border-b-grey-100 shadow-[0_2px_2px_#EFEFEF] left-1/2 -translate-x-1/2'>
         <img
           src={Return}
           alt='return'

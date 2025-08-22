@@ -39,7 +39,7 @@ const router = createBrowserRouter([
     element: <WritePage />,
   },
   {
-    path: '/editpage',
+    path: '/editpage/:memory_id',
     element: <EditPage />,
   },
   {

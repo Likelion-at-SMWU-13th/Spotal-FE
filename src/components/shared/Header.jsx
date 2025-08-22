@@ -1,4 +1,3 @@
-import React from 'react'
 import Return from '../../assets/return.svg'
 import { useNavigate } from 'react-router-dom'
 

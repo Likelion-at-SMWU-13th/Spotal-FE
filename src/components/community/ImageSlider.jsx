@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import { useEffect, useState } from 'react'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Slider from 'react-slick'
 
-function ImageSlider({ urllist, w, h }) {
+function ImageSlider({ urllist = [], w, h }) {
   const [current, setCurrent] = useState(0)
+  const [imageUrlList, setImageUrlList] = useState([])
   const settings = {
     dots: true,
     arrows: false,
@@ -30,13 +31,20 @@ function ImageSlider({ urllist, w, h }) {
     ),
     beforeChange: (oldIndex, newIndex) => setCurrent(newIndex),
   }
+
+  useEffect(() => {
+    if (urllist) {
+      setImageUrlList(urllist.map((u) => u.image_url))
+    }
+  }, [urllist])
+
   return (
     <div
       className='relative mt-[1.6vh] rounded-[10px] overflow-hidden'
-      style={{ width: w, height: h }}
+      style={{ width: w, height: h, maxWidth: '31.5rem' }}
     >
       <Slider {...settings}>
-        {urllist.map((url, i) => (
+        {imageUrlList.map((url, i) => (
           <div
             key={`${urllist}-${i}`}
             className='h-full outline-none [--tw-tap-highlight-color:transparent]'
