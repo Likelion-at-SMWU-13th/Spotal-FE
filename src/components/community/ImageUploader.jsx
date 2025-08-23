@@ -91,7 +91,7 @@ const ImageUploader = ({ urllist, onFilesChange, onRemove }) => {
         {images.map((image, i) => (
           <div
             key={i}
-            className='relative flex flex-col shrink-0 snap-start justify-center items-center w-[14.87vw] h-[14.87vw] bg-white border-[0.9px] border-grey-200 rounded-[9px] overflow-hidden'
+            className='relative flex flex-col shrink-0 snap-start justify-center items-center w-[14.87vw] h-[14.87vw] max-w-[10rem] max-h-[10rem] bg-white border-[0.9px] border-grey-200 rounded-[9px] overflow-hidden'
           >
             <img
               src={image.src}

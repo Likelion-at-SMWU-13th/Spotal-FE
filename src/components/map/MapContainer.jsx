@@ -3,7 +3,7 @@ import KakaoMap from './KakaoMap'
 
 const MapContainer = ({ markers }) => {
   return (
-    <div>
+    <div className='flex justify-center'>
       <KakaoMap markers={markers} />
     </div>
   )

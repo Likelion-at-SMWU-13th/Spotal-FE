@@ -19,21 +19,24 @@ export function CardCarousel({ placeData }) {
               {placeData.slice(i * 2, i * 2 + 2).map((place, j) => (
                 <EmotionCard
                   key={j}
-                  placeName={place.placeName}
+                  placeName={place.name}
                   status={place.status}
                   address={place.address}
                   summary={place.summary}
-                  tags={place.tags}
+                  tags={place.emotions}
+                  url={place.image_url}
                 />
               ))}
             </div>
           </CarouselItem>
         ))}
       </CarouselContent>
-      <div className='flex justify-center gap-4 mt-4'>
-        <CarouselPrevious className='static translate-y-0' />
-        <CarouselNext className='static translate-y-0' />
-      </div>
+      {placeData.length > 2 && (
+        <div className='flex justify-center gap-4 mt-4'>
+          <CarouselPrevious className='static translate-y-0' />
+          <CarouselNext className='static translate-y-0' />
+        </div>
+      )}
     </Carousel>
   )
 }

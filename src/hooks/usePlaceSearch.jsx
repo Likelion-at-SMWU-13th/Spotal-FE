@@ -29,6 +29,7 @@ const usePlaceSearch = () => {
             summary_card: res.data.summary_card,
             photos: res.data.photos,
             emotions: emotionNames,
+            category: res.data.store.uptaenm,
           },
         ]
         setMarker(newMarker)

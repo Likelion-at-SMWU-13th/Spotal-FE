@@ -10,7 +10,7 @@ const Loading = () => {
       <BeatLoader color='#ffba42' />
       <div className='relative flex justify-center items-center mt-[15vh]'>
         {/* 블러 배경 */}
-        <div className='absolute w-[100%] h-[100%] bg-primary-200 blur-[9rem] rounded-full pointer-events-none -z-10' />
+        <div className='absolute w-[100%] h-[100%] bg-primary-200 blur-[9rem] rounded-full pointer-events-none -z-10 animate-pulse bg-gradient-to-b from-primary-200 to-primary' />
         {/* 캐릭터 이미지 */}
         <img
           className='relative z-10 w-full h-full object-contain'

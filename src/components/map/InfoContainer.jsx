@@ -1,20 +1,24 @@
-import React from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '../shared/Button'
+import useRecommend from '@/hooks/useRecommend'
 
-const InfoContainer = ({ placeName, status, address, summary, tags = [] }) => {
+const InfoContainer = ({ placeName, status, address, summary, tags = [], category, load }) => {
   const navigate = useNavigate()
+  const { fetchRecommend } = useRecommend()
 
-  const goToRecommended = () => {
+  const isFoodIncluded = category?.includes('food') ?? false
+
+  const goToRecommended = async () => {
+    load(true)
+    const recommend = await fetchRecommend(placeName, address, tags)
     navigate('/recommended', {
-      state: { placeData: { placeName, status, address, summary, tags }, years: true },
+      state: { placeData: recommend },
     })
   }
-
   return (
-    <div className='absolute bottom-[80px] left-1/2 -translate-x-1/2 w-[85%] max-w-[500px] bg-white rounded-[20px] shadow-lg p-6 z-[50]'>
+    <div className='absolute bottom-[80px] left-1/2 -translate-x-1/2 w-[85%] max-w-[500px] bg-white rounded-[20px] shadow-lg p-6 z-[30]'>
       <button className='block bg-[#ADADAD] w-[134px] h-[5px] rounded-[10px] mx-auto mb-6'></button>
-
       <div className='flex justify-between items-center mb-2 bg-primary-300 pt-3 pb-3 pl-5 pr-5 rounded-[10px]'>
         <h2 className='m-0 font-bold text-xl max-w-[44vw]'>{placeName}</h2>
         <span
@@ -50,8 +54,9 @@ const InfoContainer = ({ placeName, status, address, summary, tags = [] }) => {
           ))}
         </div>
       </div>
-
-      <Button onClick={goToRecommended} type={'submit'} label={'유사 가게 추천 받기'}></Button>
+      {isFoodIncluded && (
+        <Button onClick={goToRecommended} type={'submit'} label={'유사 가게 추천 받기'}></Button>
+      )}
     </div>
   )
 }

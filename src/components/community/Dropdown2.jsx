@@ -4,10 +4,10 @@ import { useOutsideClick } from '@/hooks/useOutsideClick.jsx'
 import ChevronUp from '@/assets/ChevronUp.svg'
 import ChevronDown from '@/assets/ChevronDown.svg'
 
-const arraysEqualById = (a = [], b = [], idKey) => {
+const arraysEqualById = (a = [], b = [], id) => {
   if (a.length !== b.length) return false
   for (let i = 0; i < a.length; i++) {
-    if (a[i][idKey] !== b[i][idKey]) return false
+    if (a[i][id] !== b[i][id]) return false
   }
   return true
 }

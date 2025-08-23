@@ -5,14 +5,12 @@ import useOutsideClick from '@/hooks/useOutsideClick'
 import { baseURL } from '@/pages/Signup'
 import axios from 'axios'
 
-const PostMenu = ({ memory_id, postUserId }) => {
+const PostMenu = ({ memory_id }) => {
   const [open, setOpen] = useState(false)
   const rootRef = useRef(null)
 
   useOutsideClick(rootRef, () => setOpen(false), open)
   const navigate = useNavigate()
-  const currentUserId = localStorage.getItem('user.id')
-  const isUser = currentUserId == postUserId
 
   const deletePost = () => {
     axios
@@ -39,7 +37,7 @@ const PostMenu = ({ memory_id, postUserId }) => {
       >
         <img src={PostMenuSvg} alt='메뉴 열기' />
       </button>
-      {isUser && open && (
+      {open && (
         <div className='flex flex-col bg-white rounded-[10px] w-[18.72vw] mt-[1px] font-[SemiBold] text-[0.625rem] text-grey-700 overflow-hidden absolute top-full right-[-10px] z-40 shadow-[0_4px_4px_rgba(0,0,0,0.1)]'>
           <button
             className='py-[0.5rem] hover:bg-primary-300 cursor-pointer border-b-[1px] border-gray-100 active:bg-primary-300'

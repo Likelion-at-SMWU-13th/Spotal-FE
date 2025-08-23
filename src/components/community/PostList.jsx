@@ -13,21 +13,14 @@ const PostList = ({ postData }) => {
   return (
     <div className='flex flex-col gap-[3.91vh] w-full'>
       {postData.map((post) => {
-        const locationName = post?.location?.name ?? null
-        const emotionNames = Array.isArray(post?.emotions)
-          ? post.emotions.map((e) => (typeof e === 'string' ? e : e?.name)).filter(Boolean)
-          : []
-        const urls = Array.isArray(post?.images) ? post.images : []
-        const content = typeof post?.content === 'string' ? post.content : ''
-        console.log(emotionNames)
         return (
           <div key={post.memory_id}>
             <Post
               userId={post.user_id}
-              emotionTags={emotionNames}
-              locationTags={locationName}
-              urllist={urls}
-              text={content}
+              emotionTags={post.emotions.map((e) => (typeof e === 'string' ? e : e.name))}
+              locationTags={post.location.name}
+              urllist={post.images}
+              text={post.content}
               memory_id={post.memory_id}
             />
           </div>

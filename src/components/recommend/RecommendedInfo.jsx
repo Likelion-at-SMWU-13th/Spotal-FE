@@ -1,7 +1,7 @@
 import React from 'react'
 import Close from '@/assets/Close.svg'
 
-const RecommendedInfo = ({ placeName, status, address, summary, tags = [], onClose }) => {
+const RecommendedInfo = ({ placeName, status, address, summary, tags = [], image, onClose }) => {
   return (
     <div className='fixed inset-0 bg-[rgba(173,173,173,0.5)] pt-[10vh] z-[1000]'>
       <div className='fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[85%] max-w-[400px] bg-white rounded-[20px] shadow-lg p-6 z-[2000]'>
@@ -9,7 +9,7 @@ const RecommendedInfo = ({ placeName, status, address, summary, tags = [], onClo
           <img src={Close} onClick={onClose} className=''></img>
         </div>
 
-        <img src='' className='bg-grey-100 w-[80vw] h-[150px] rounded-[10px] mb-2'></img>
+        <img src={image} className='bg-grey-100 w-[80vw] h-[150px] rounded-[10px] mb-2'></img>
 
         <div className='flex justify-between items-center mb-2 bg-primary-300 pt-3 pb-3 pl-5 pr-5 rounded-[10px]'>
           <h2 className='m-0 font-bold text-xl max-w-[44vw]'>{placeName}</h2>

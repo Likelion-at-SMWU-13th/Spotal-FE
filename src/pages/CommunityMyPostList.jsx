@@ -9,14 +9,25 @@ import { baseURL } from './Signup'
 const CommunityMyPostList = () => {
   const [myPostData, setMyPostData] = useState([])
   const userId = localStorage.getItem('user.id')
+  const [emotionId, setEmotionId] = useState(null)
+  const [locationId, setLocationId] = useState(null)
+
+  const postUrl = (emotionId, locationId) => {
+    const url = new URL(`${baseURL}/community/my/?user_id=${userId}`)
+    const params = url.searchParams
+    if (emotionId != null) params.set('emotion_ids', emotionId)
+    if (locationId != null) params.set('location_id', locationId)
+    console.log(url)
+    console.log(emotionId)
+    console.log(locationId)
+
+    return url.toString()
+  }
 
   const getMyPost = () => {
     axios
-      .get(`${baseURL}/community/my/?user_id=${userId}`)
+      .get(`${postUrl(emotionId, locationId)}`)
       .then((res) => {
-        console.log(res.data)
-        console.log(res.data.message)
-        console.log(res.data.data)
         const posts = Array.isArray(res.data?.data) ? res.data.data : []
         setMyPostData(posts)
       })
@@ -28,7 +39,7 @@ const CommunityMyPostList = () => {
 
   useEffect(() => {
     getMyPost()
-  }, [])
+  }, [emotionId, locationId])
 
   return (
     <div className='flex flex-col items-center justify-center '>
@@ -37,8 +48,8 @@ const CommunityMyPostList = () => {
         <div className='pt-[7.11vh] pb-[10vh] bg-white min-h-screen'>
           <div className='flex justify-between my-[2.49vh]'>
             <div className='flex gap-[1.54vw] '>
-              <Dropdown label={'감정'} />
-              <Dropdown label={'동네'} />
+              <Dropdown onSelect={(id) => setEmotionId(id)} label={'감정'} />
+              <Dropdown onSelect={(id) => setLocationId(id)} label={'동네'} />
             </div>
           </div>
           <PostList postData={myPostData} />

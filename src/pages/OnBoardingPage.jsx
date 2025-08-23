@@ -1,46 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import ProgressBar from '@/components/onboarding/ProgressBar.jsx'
-import OnBoarding1 from '../assets/OnBoarding1.svg'
-import OnBoarding2 from '../assets/OnBoarding2.svg'
-import OnBoarding3 from '../assets/OnBoarding3.svg'
+import OnBoarding1 from '../assets/OnBoarding1.svg?react'
+import OnBoarding2 from '../assets/OnBoarding2.svg?react'
+import OnBoarding3 from '../assets/OnBoarding3.svg?react'
 import FooterBtn from '@/components/onboarding/FooterBtn.jsx'
 import { useNavigate } from 'react-router-dom'
 
 const OnBoardingPage = () => {
   const [step, setStep] = useState(0)
   const navigate = useNavigate()
-  const [imgLoaded, setImgLoaded] = useState(false)
 
   const steps = [
-    { question: '골목에서 좋아하던 가게가 <br/> 사라진 걸 깨달은 적 있나요?', image: OnBoarding1 },
+    { question: '골목에서 좋아하던 가게가 <br/> 사라진 걸 깨달은 적 있나요?', Image: OnBoarding1 },
     {
       question:
         'Spotal은 감정 기반으로 <br/>사라진 기억의 흔적을 다시 이어주는 <br/>용산의 정서 지도에요.',
-      image: OnBoarding2,
+      Image: OnBoarding2,
     },
     {
       question:
         '누구는 분위기만 기억하고, <br/>누구는 가게 이름을 정확히 기억해요. <br/>당신의 기억 방식은 어떤가요?',
-      image: OnBoarding3,
+      Image: OnBoarding3,
     },
   ]
 
-  useEffect(() => {
-    setImgLoaded(false)
-    const src = steps[step].image
-    const img = new Image()
-    img.src = src
-    if (img.decode) {
-      img
-        .decode()
-        .catch(() => {})
-        .finally(() => setImgLoaded(true))
-    } else {
-      img.onload = () => setImgLoaded(true)
-      img.onerror = () => setImgLoaded(true)
-    }
-  }, [step, steps])
-
+  const CurrentImage = steps[step].Image
   const nextStep = () => {
     if (step < steps.length - 1) {
       setStep((prev) => prev + 1)
@@ -71,13 +55,7 @@ const OnBoardingPage = () => {
         />
         <div className='absolute top-[39.9vh] w-[76.9vw] h-[35.54vh] left-1/2 -translate-x-1/2'>
           <div className='absolute mt-[50px] w-[70vw] md:w-[30rem] left-1/2 -translate-x-1/2 h-[25vh] inset-0 -z-10 bg-primary-200 md:blur-[7rem] blur-[5rem] rounded-full pointer-events-none animate-pulse bg-gradient-to-b from-primary-200 to-primary' />
-          <img
-            className='relative z-10 w-full h-full object-contain'
-            src={steps[step].image}
-            alt='온보딩 캐릭터'
-            loading='eager'
-            decoding='async'
-          />
+          <CurrentImage className='relative z-10 w-full h-full' focusable={false} />
         </div>
       </div>
       <div className='absolute bottom-[9.5vh] flex max-w-[768px] md:gap-[20rem] gap-[45vw] px-[6.67vw]'>

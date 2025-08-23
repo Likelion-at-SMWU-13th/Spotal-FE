@@ -1,15 +1,26 @@
 import { useState } from 'react'
-const EmotionCard = ({ placeName, status, address, summary, tags = [] }) => {
+const EmotionCard = ({ placeName, status, address, summary, tags = [], url }) => {
   const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded2, setIsExpanded2] = useState(false)
 
   return (
     <div className='bg-white w-[92.56vw] md:w-[40rem] py-[1.78vh] flex items-center justify-center gap-[2.56vw] rounded-[20px] shadow-[0_4px_4px_rgba(0,0,0,0.1)]'>
-      <img className='w-[35.9vw] md:w-[10rem] h-[14.34vh] rounded-[10px] bg-gray-100' />
+      <img
+        src={url}
+        className='w-[35.9vw] md:w-[10rem] h-[14.34vh] rounded-[10px] bg-gray-100 object-cover'
+      />
       <div className='flex flex-col gap-[0.91vh]'>
-        <div className='flex justify-between items-center bg-primary-300 w-[48.2vw] md:w-[25rem] h-[3.87vh] py-[1.9vh] px-[4vw] rounded-[10px]'>
-          <h2 className='font-[SemiBold] text-gray-700 text-[10px]'>{placeName}</h2>
+        <div
+          className='flex justify-between items-center bg-primary-300 w-[48.2vw] md:w-[25rem] px-[4.36vw] py-[1.3vh] rounded-[10px]'
+          onClick={() => setIsExpanded2(true)}
+        >
+          <h2
+            className={`font-[SemiBold] text-gray-700 text-[10px] truncate min-w-0 hover:whitespace-pre-wrap hover:overflow-visible ${isExpanded2 ? 'whitespace-pre-wrap overflow-visible' : 'truncate'}`}
+          >
+            {placeName}
+          </h2>
           <div
-            className={`flex items-center justify-center rounded-full w-[11.7vw] max-w-[50px] h-[2vh] border select-none text-[8px] ${
+            className={`flex items-center justify-center rounded-full w-[11.7vw] max-w-[50px] sm:min-w-[50px] md:min-w-[50px] min-w-[11.7vw] h-[2vh] border select-none text-[8px] ${
               status === '폐업함'
                 ? 'bg-[#FDF2F8] text-[#BE195D] border-[#BE195D]'
                 : status === '이전함'

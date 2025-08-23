@@ -21,21 +21,32 @@ export const locationList = [
   { location_id: 7, name: '해방촌' },
 ]
 
-const Dropdown = ({ label }) => {
+const Dropdown = ({ label, onSelect }) => {
   const [open, setOpen] = useState(false)
 
   const [displayLabel, setDisplayLabel] = useState(label)
   const [filtered, setFiltered] = useState(false)
   const [selected, setSelected] = useState('전체')
+  const [filteredId, setFilteredId] = useState(null)
 
   const rootRef = useRef(null)
   useOutsideClick(rootRef, () => setOpen(false), open)
 
   let options = []
   if (label === '감정') {
-    options = emotionList.map((e) => e.name)
+    options = emotionList
   } else if (label === '동네') {
-    options = locationList.map((l) => l.name)
+    options = locationList
+  }
+
+  const handleSelect = (opt) => {
+    const id = opt.emotion_id ?? opt.location_id ?? null
+    setDisplayLabel(opt ? opt.name : label)
+    setFiltered(!!opt)
+    setSelected(opt || '전체')
+    setFilteredId(id)
+    setOpen(false)
+    if (onSelect) onSelect(id)
   }
 
   return (
@@ -52,7 +63,7 @@ const Dropdown = ({ label }) => {
       </button>
 
       {open && (
-        <div className='flex flex-col bg-grey-100 rounded-[10px] w-[18.72vw] max-w-[6rem] mt-[1px] font-[SemiBold] text-[0.625rem] text-grey-700 overflow-hidden absolute top-full left-0 z-40'>
+        <div className='flex flex-col bg-grey-100 rounded-[10px] w-[18.72vw] max-w-[6rem] mt-[3px] font-[SemiBold] text-[0.625rem] text-grey-700 overflow-hidden absolute top-full left-0 z-40'>
           <button
             className={`hover:bg-primary-300 p-[5px] active:bg-primary-300 ${
               selected === '전체' ? 'bg-primary-300' : 'bg-grey-100'
@@ -61,26 +72,28 @@ const Dropdown = ({ label }) => {
               setDisplayLabel(label)
               setFiltered(false)
               setOpen(false)
+              setSelected('전체')
+              onSelect(null)
             }}
           >
             전체
           </button>
-          {options.map((opt) => (
-            <button
-              className={`hover:bg-primary-300 p-[5px] active:bg-primary-300 ${
-                selected === opt ? 'bg-primary-300' : 'bg-grey-100'
-              }`}
-              key={opt}
-              onClick={() => {
-                setDisplayLabel(opt)
-                setFiltered(true)
-                setOpen(false)
-                setSelected(opt)
-              }}
-            >
-              {opt}
-            </button>
-          ))}
+          {options.map((opt) => {
+            const id = opt.emotion_id ?? opt.location_id
+            return (
+              <button
+                className={`hover:bg-primary-300 p-[5px] active:bg-primary-300 ${
+                  selected === opt ? 'bg-primary-300' : 'bg-grey-100'
+                }`}
+                key={id}
+                onClick={() => {
+                  handleSelect(opt)
+                }}
+              >
+                {opt.name}
+              </button>
+            )
+          })}
         </div>
       )}
     </div>

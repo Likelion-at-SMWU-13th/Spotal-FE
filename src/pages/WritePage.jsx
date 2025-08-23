@@ -64,7 +64,7 @@ const WritePage = () => {
       <div className='w-full max-w-[768px] bg-white min-h-screen'>
         <Header label={'글 작성하기'} />
         <div className='bg-white flex justify-center pb-[13vh]'>
-          <div className='w-[80%] pt-[13.98vh] bg-primary-300 rounded-[10px] '>
+          <div className='w-[80%] mt-[13.98vh] bg-primary-300 rounded-[10px] '>
             <form className='flex flex-col justify-center align-middle'>
               <div className='flex flex-col gap-[2.3vh] self-center py-10 mx-5'>
                 <div className={`${divClass}`}>

@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react'
-import Logo from '../assets/Logo.svg'
+import Logo from '../assets/Logo.svg?react'
 import AuthBox from '@/components/auth/AuthBox.jsx'
 import AuthBtn from '@/components/auth/AuthBtn.jsx'
 import { Link, useNavigate } from 'react-router-dom'
@@ -35,7 +35,7 @@ const Login = () => {
   return (
     <div className='flex flex-col items-center justify-center'>
       <div className='min-h-screen flex flex-col items-center justify-items-center bg-white w-full max-w-[768px]'>
-        <img className='mt-[20vh]' src={Logo} />
+        <Logo className='mt-[20vh]' title='Logo' />
         <form className='flex flex-col gap-[1.184vh] mt-[10vh]'>
           <AuthBox label='이메일' name='email' value={values.email} onChange={handleChange} />
           <AuthBox

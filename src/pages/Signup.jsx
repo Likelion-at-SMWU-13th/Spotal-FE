@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import Logo from '../assets/Logo.svg'
-import SignupImg from '../assets/Signup.svg'
+import Logo from '../assets/Logo.svg?react'
+import SignupImg from '../assets/Signup.svg?react'
 import AuthBox2 from '@/components/auth/AuthBox2.jsx'
 import AuthBox from '@/components/auth/AuthBox.jsx'
 import AuthBtn from '@/components/auth/AuthBtn.jsx'
@@ -80,8 +80,8 @@ const Signup = () => {
   return (
     <div className='flex items-center justify-center'>
       <div className='flex flex-col min-h-screen items-center justify-center bg-white w-full max-w-[768px]'>
-        <img className='mt-[6.5vh]' src={Logo} alt='Logo' />
-        <img className='mt-[3.08vh]' src={SignupImg} alt='SignupImg' />
+        <Logo className='mt-[6.5vh]' title='Logo' />
+        <SignupImg className='mt-[3.08vh]' title='SignupImg' />
         <form
           onSubmit={(e) => {
             e.preventDefault() // 새로고침 방지!
