@@ -86,7 +86,7 @@ const Dropdown2 = ({ placeholder, options = [], onChange, name, value }) => {
       >
         <input
           type='text'
-          className='w-full focus:outline-none'
+          className='w-full focus:outline-none cursor-pointer'
           name={name}
           value={displayText}
           placeholder={placeholder}

@@ -13,6 +13,7 @@ const RecommendedPlaces = ({
   summary,
   tags = [],
   image = null,
+  rec,
 }) => {
   const [isMarked, setIsMarked] = useState(false)
   const [isInfoOpen, setIsInfoOpen] = useState(false)
@@ -33,6 +34,7 @@ const RecommendedPlaces = ({
         .post(`${import.meta.env.VITE_API_BASE_URL}/api/places/saved/create/`, {
           shop: id,
           user: currentUserId,
+          rec: rec,
         })
         .then((res) => {
           setBookmarkId(res.data.saved_id)

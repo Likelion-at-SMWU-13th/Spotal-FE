@@ -79,7 +79,7 @@ const ImageUploader = ({ urllist, onFilesChange, onRemove }) => {
   return (
     <div className='relative'>
       <div className='flex gap-[7px] overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'>
-        <label className='flex shrink-0 snap-start flex-col justify-center items-center w-[14.87vw] h-[14.87vw] max-w-[10rem] max-h-[10rem] bg-white border-[0.9px] border-grey-200 rounded-[9px]'>
+        <label className='flex shrink-0 snap-start flex-col justify-center items-center w-[14.87vw] h-[14.87vw] max-w-[10rem] max-h-[10rem] bg-white border-[0.9px] border-grey-200 rounded-[9px] cursor-pointer'>
           <span>
             <img src={Camera} />
           </span>

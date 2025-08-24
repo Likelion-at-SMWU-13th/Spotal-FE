@@ -52,7 +52,7 @@ const CommunityPostList = () => {
               <Dropdown onSelect={(id) => setLocationId(id)} label={'동네'} />
             </div>
             <button
-              className='w-[18.72vw] max-w-[6rem] h-[1.5rem] bg-primary-300 border-primary border-[0.5px] rounded-[5px] font-[SemiBold] text-[12px] text-primary'
+              className='w-[18.72vw] max-w-[6rem] h-[1.5rem] bg-primary-300 border-primary border-[0.5px] rounded-[5px] font-[SemiBold] text-[12px] text-primary cursor-pointer'
               onClick={() => navigate('/writepage')}
             >
               새 글 작성

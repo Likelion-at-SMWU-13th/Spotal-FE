@@ -1,25 +1,7 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 
 const SearchResults = ({ keyword, goToMap }) => {
   const [results, setResults] = useState([])
-  const kakaoLoadedRef = useRef(false)
-
-  const loadKakaoScript = () => {
-    return new Promise((resolve) => {
-      if (window.kakao) {
-        kakaoLoadedRef.current = true
-        return resolve()
-      }
-
-      const script = document.createElement('script')
-      script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${import.meta.env.VITE_KAKAO_API_KEY}&libraries=services`
-      script.onload = () => {
-        kakaoLoadedRef.current = true
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  }
 
   useEffect(() => {
     if (!keyword.trim()) {
@@ -27,25 +9,17 @@ const SearchResults = ({ keyword, goToMap }) => {
       return
     }
 
-    loadKakaoScript().then(() => {
-      if (!window.kakao) {
-        console.error('Kakao Maps API 로드 실패')
+    const ps = new kakao.maps.services.Places()
+    ps.keywordSearch(keyword, (data, status) => {
+      if (status === kakao.maps.services.Status.OK) {
+        const filtered = data.filter(
+          (place) =>
+            place.address_name.includes('용산구') || place.road_address_name?.includes('용산구'),
+        )
+        setResults(filtered)
+      } else {
         setResults([])
-        return
       }
-
-      const ps = new window.kakao.maps.services.Places()
-      ps.keywordSearch(keyword, (data, status) => {
-        if (status === window.kakao.maps.services.Status.OK) {
-          const filtered = data.filter(
-            (place) =>
-              place.address_name.includes('용산구') || place.road_address_name?.includes('용산구'),
-          )
-          setResults(filtered)
-        } else {
-          setResults([])
-        }
-      })
     })
   }, [keyword])
 

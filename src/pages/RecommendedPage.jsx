@@ -27,6 +27,7 @@ const RecommendedPage = () => {
               address={place.address}
               summary={place.ai_summary}
               tags={[...(place.emotions || []), place.location]}
+              rec={place.rec}
               image={place.image_url}
             />
           ))

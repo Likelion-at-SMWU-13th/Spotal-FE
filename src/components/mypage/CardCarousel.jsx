@@ -33,8 +33,8 @@ export function CardCarousel({ placeData }) {
       </CarouselContent>
       {placeData.length > 2 && (
         <div className='flex justify-center gap-4 mt-4'>
-          <CarouselPrevious className='static translate-y-0' />
-          <CarouselNext className='static translate-y-0' />
+          <CarouselPrevious className='static translate-y-0 border-[#eaeaea] cursor-pointer' />
+          <CarouselNext className='static translate-y-0 border-[#eaeaea] cursor-pointer' />
         </div>
       )}
     </Carousel>
