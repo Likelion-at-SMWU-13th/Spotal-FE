@@ -15,56 +15,50 @@ import MemorySearchPage from './pages/MemorySearchPage'
 
 const router = createBrowserRouter([
   {
-    path: '/mypage',
-    element: <Mypage />,
-  },
-  {
     path: '/',
-    element: <OnBoarding />,
-  },
-  {
-    path: '/login',
-    element: <Login />,
-  },
-  {
-    path: '/signup',
-    element: <Signup />,
-  },
-  {
-    path: '/onboarding',
-    element: <OnBoarding />,
-  },
-  {
-    path: '/writepage',
-    element: <WritePage />,
-  },
-  {
-    path: '/editpage/:memory_id',
-    element: <EditPage />,
-  },
-  {
-    path: '/mypost',
-    element: <CommunityMyPostList />,
-  },
-  {
-    path: '/post',
-    element: <CommunityPostList />,
-  },
-  {
-    path: '/home',
-    element: <HomePage />,
-  },
-  {
-    path: '/map',
-    element: <MapPage />,
-  },
-  {
-    path: '/recommended',
-    element: <RecommendedPage />,
-  },
-  {
-    path: '/memory',
-    element: <MemorySearchPage />,
+    element: <App />,
+    children: [
+      { index: true, element: <OnBoarding /> },
+      { path: 'login', element: <Login /> },
+      { path: 'mypage', element: <Mypage /> },
+      {
+        path: 'signup',
+        element: <Signup />,
+      },
+      {
+        path: 'writepage',
+        element: <WritePage />,
+      },
+      {
+        path: 'editpage/:memory_id',
+        element: <EditPage />,
+      },
+      {
+        path: 'mypost',
+        element: <CommunityMyPostList />,
+      },
+      {
+        path: 'post',
+        element: <CommunityPostList />,
+      },
+      {
+        path: 'home',
+        element: <HomePage />,
+      },
+      {
+        path: 'map',
+        element: <MapPage />,
+      },
+
+      {
+        path: 'recommended',
+        element: <RecommendedPage />,
+      },
+      {
+        path: 'memory',
+        element: <MemorySearchPage />,
+      },
+    ],
   },
 ])
 
