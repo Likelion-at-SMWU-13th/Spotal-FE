@@ -9,6 +9,7 @@ const AuthBox2 = ({ label, bg, onClick, value, onChange, name }) => {
           value={value}
           onChange={onChange}
           name={name}
+          autoComplete='off'
         />
         <button
           className={`w-[16.49vw] max-w-[63px] h-[2.844vh] min-h-[24px] ${bg} rounded-[7px] font-[SemiBold] text-[0.625rem] cursor-pointer`}

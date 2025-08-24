@@ -3,7 +3,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Slider from 'react-slick'
 
-function ImageSlider({ urllist = [], w, h }) {
+function ImageSlider({ urllist = [], w }) {
   const [current, setCurrent] = useState(0)
   const [imageUrlList, setImageUrlList] = useState([])
   const settings = {
@@ -33,29 +33,36 @@ function ImageSlider({ urllist = [], w, h }) {
   }
 
   useEffect(() => {
-    if (urllist) {
+    if (!Array.isArray(urllist)) {
+      return
+    }
+    if (typeof urllist[0] === 'string') {
+      setImageUrlList(urllist)
+    } else if (typeof urllist[0] === 'object' && urllist[0]?.image_url) {
       setImageUrlList(urllist.map((u) => u.image_url))
     }
   }, [urllist])
 
   return (
     <div
-      className='relative mt-[1.6vh] rounded-[10px] overflow-hidden'
-      style={{ width: w, height: h, maxWidth: '31.5rem' }}
+      className='relative mt-[1.6vh] [&>div]:rounded-[10px] [&>div]:overflow-hidden'
+      style={{ width: w, maxWidth: '31.5rem', overflow: 'hidden', borderRadius: '10px' }}
     >
       <Slider {...settings}>
         {imageUrlList.map((url, i) => (
           <div
             key={`${urllist}-${i}`}
-            className='h-full outline-none [--tw-tap-highlight-color:transparent]'
+            className='flex justify-center items-center [&>div]:rounded-[10px] [&>div]:overflow-hidden outline-none [--tw-tap-highlight-color:transparent]'
           >
-            <img
-              className='block w-full h-full object-cover bg-grey-100'
-              style={{ width: w, height: h }}
-              alt='골목 과거 사진'
-              src={url}
-              loading='lazy'
-            />
+            <div className='justify-center items-center [&>div]:rounded-[10px] [&>div]:overflow-hidden'>
+              <img
+                className='object-cover bg-grey-100 rounded-[10px] overflow-hidden'
+                style={{ width: w, height: w }}
+                alt='골목 과거 사진'
+                src={url}
+                loading='lazy'
+              />
+            </div>
           </div>
         ))}
       </Slider>

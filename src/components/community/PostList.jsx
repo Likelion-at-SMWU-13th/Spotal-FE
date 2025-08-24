@@ -22,6 +22,7 @@ const PostList = ({ postData }) => {
               urllist={post.images}
               text={post.content}
               memory_id={post.memory_id}
+              nickname={post.nickname}
             />
           </div>
         )

@@ -80,8 +80,8 @@ const Signup = () => {
   return (
     <div className='flex items-center justify-center'>
       <div className='flex flex-col min-h-screen items-center justify-center bg-white w-full max-w-[768px]'>
-        <Logo className='mt-[6.5vh]' title='Logo' />
-        <SignupImg className='mt-[3.08vh]' title='SignupImg' />
+        <Logo className='mt-[6.5vh]' aria-label='Logo' />
+        <SignupImg className='mt-[3.08vh]' aria-label='SignupImg' />
         <form
           onSubmit={(e) => {
             e.preventDefault() // 새로고침 방지!

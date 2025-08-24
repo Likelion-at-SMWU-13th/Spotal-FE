@@ -35,7 +35,7 @@ const Login = () => {
   return (
     <div className='flex flex-col items-center justify-center'>
       <div className='min-h-screen flex flex-col items-center justify-items-center bg-white w-full max-w-[768px]'>
-        <Logo className='mt-[20vh]' title='Logo' />
+        <Logo className='mt-[20vh]' aria-label='Logo' />
         <form className='flex flex-col gap-[1.184vh] mt-[10vh]'>
           <AuthBox label='이메일' name='email' value={values.email} onChange={handleChange} />
           <AuthBox

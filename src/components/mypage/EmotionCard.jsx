@@ -1,12 +1,15 @@
 import { useState } from 'react'
+import NoResult from '@/assets/NoResult.svg'
 const EmotionCard = ({ placeName, status, address, summary, tags = [], url }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [isExpanded2, setIsExpanded2] = useState(false)
+  const [image, setImage] = useState(url || NoResult)
 
   return (
     <div className='bg-white w-[92.56vw] md:w-[40rem] py-[1.78vh] flex items-center justify-center gap-[2.56vw] rounded-[20px] shadow-[0_4px_4px_rgba(0,0,0,0.1)]'>
       <img
-        src={url}
+        src={image}
+        onError={() => setImage(NoResult)}
         className='w-[35.9vw] md:w-[10rem] h-[14.34vh] rounded-[10px] bg-gray-100 object-cover'
       />
       <div className='flex flex-col gap-[0.91vh]'>

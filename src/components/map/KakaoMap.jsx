@@ -1,9 +1,10 @@
 import { useState, useRef } from 'react'
-import { Map, Polyline } from 'react-kakao-maps-sdk'
+import { Map, MapMarker, Polyline } from 'react-kakao-maps-sdk'
 import Marker from './Marker'
 import InfoContainer from './InfoContainer'
 import Loading from '../shared/Loading'
 import useLoadPolyline from '@/hooks/useLoadPolyline'
+import Marker2 from '@/assets/Marker2.svg'
 
 const KakaoMap = ({ markers }) => {
   const [selectedMarker, setSelectedMarker] = useState(null)
@@ -27,10 +28,10 @@ const KakaoMap = ({ markers }) => {
   }
 
   const linePath =
-    markers.length && markers[0].status === '이전함'
+    markers.length && markers[0].status === '이전함' && markers[0].previous_lng != null
       ? useLoadPolyline({
           origin: `${markers[0].lng},${markers[0].lat}`,
-          destination: '127.033,37.501',
+          destination: `${markers[0].previous_lng},${markers[0].previous_lat}`,
         })
       : []
 
@@ -82,13 +83,22 @@ const KakaoMap = ({ markers }) => {
           />
         ))}
         {linePath.length > 0 && (
-          <Polyline
-            path={linePath}
-            strokeWeight={5}
-            strokeColor='#ff6200'
-            strokeOpacity={0.8}
-            strokeStyle='solid'
-          />
+          <>
+            <MapMarker
+              position={{ lat: markers[0].previous_lat, lng: markers[0].previous_lng }}
+              image={{
+                src: Marker2,
+                size: { width: 50, height: 50 },
+              }}
+            ></MapMarker>
+            <Polyline
+              path={linePath}
+              strokeWeight={5}
+              strokeColor='#ff6200'
+              strokeOpacity={0.8}
+              strokeStyle='solid'
+            />
+          </>
         )}
         {isOpenMarker && (
           <InfoContainer

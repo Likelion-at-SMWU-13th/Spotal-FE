@@ -23,7 +23,7 @@ const RecommendedPage = () => {
               key={place.shop_id}
               id={place.shop_id}
               placeName={place.name}
-              status='운영중'
+              status={place.status}
               address={place.address}
               summary={place.ai_summary}
               tags={[...(place.emotions || []), place.location]}

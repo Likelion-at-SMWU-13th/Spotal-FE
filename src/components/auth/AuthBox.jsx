@@ -10,6 +10,7 @@ const LoginBox = ({ label, value, onChange, name }) => {
         value={value}
         onChange={onChange}
         type={label.includes('비밀번호') ? 'password' : 'text'}
+        autoComplete='off'
       />
     </div>
   )

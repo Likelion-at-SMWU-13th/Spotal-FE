@@ -30,6 +30,8 @@ const usePlaceSearch = () => {
             photos: res.data.photos,
             emotions: emotionNames,
             category: res.data.store.uptaenm,
+            previous_lat: res.data.store.previous_lat,
+            previous_lng: res.data.store.previous_lng,
           },
         ]
         setMarker(newMarker)
