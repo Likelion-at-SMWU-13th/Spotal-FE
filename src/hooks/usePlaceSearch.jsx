@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import useGelocation from './useGelocation'
+import { baseURL } from '@/pages/Signup'
 
 const usePlaceSearch = () => {
   const [marker, setMarker] = useState([])
   const [status, setStatus] = useState('idle')
-  const current = useGelocation()
+  const current = { lat: 37.547, lng: 126.964 }
 
   const fetchMarker = async (keyword) => {
     if (!keyword.trim()) return { marker: [], status: 'idle' }
@@ -13,10 +13,9 @@ const usePlaceSearch = () => {
     setStatus('loading')
 
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/search/store/`, {
+      const res = await axios.get(`${baseURL}/search/store/`, {
         params: { q: keyword, lat: current.lat, lng: current.lng },
       })
-      console.log(res.data)
       if (res.data && res.data.store) {
         const emotionNames = res.data.store.emotions?.map((e) => e.name) || []
         const newMarker = [

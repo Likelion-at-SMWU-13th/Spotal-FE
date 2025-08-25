@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useFormFilled } from '@/hooks/useFormFilled'
 import { baseURL } from './Signup.jsx'
 import axios from 'axios'
+import { toast } from 'sonner'
 
 const Login = () => {
   const { values, handleChange, isFilled } = useFormFilled({
@@ -21,14 +22,14 @@ const Login = () => {
         password: values.password,
       })
       .then((response) => {
-        alert(response.data.message)
+        toast('🟢 로그인이 완료되었습니다')
         localStorage.setItem('Token', response.data.token)
         localStorage.setItem('user.id', response.data.user.id)
         localStorage.setItem('user.nickname', response.data.user.nickname)
         navigate('/home')
       })
-      .catch((error) => {
-        alert('로그인에 실패하셨습니다.')
+      .catch(() => {
+        toast('🔴 로그인에 실패하였습니다.')
       })
   }
 

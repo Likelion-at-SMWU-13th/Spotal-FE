@@ -56,7 +56,7 @@ const Dropdown = ({ label, onSelect }) => {
         onClick={() => {
           setOpen((o) => !o)
         }}
-        className={`flex items-center justify-center w-[18.72vw] max-w-[6rem] h-[1.5rem] bg-grey-100 cursor-pointer rounded-[5px] font-[SemiBold] text-[12px] text-grey-700 ${filtered ? 'bg-primary-300' : 'bg-grey-100'}`}
+        className={`flex items-center justify-center w-[18.72vw] max-w-[6rem] h-[1.5rem] bg-grey-100 cursor-pointer rounded-[5px] font-[SemiBold] text-[12px] text-grey-700 ${filtered ? 'bg-primary-300' : 'bg-grey-100'} hover:bg-primary-300`}
       >
         {displayLabel}
         <img src={DropdownSign} />

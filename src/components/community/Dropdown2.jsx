@@ -93,7 +93,7 @@ const Dropdown2 = ({ placeholder, options = [], onChange, name, value }) => {
           readOnly
         />
         <img
-          className='w-[12px] mr-[4px]'
+          className='w-[12px] mr-[4px] cursor-pointer'
           src={open ? ChevronUp : ChevronDown}
           alt=''
           onClick={() => setOpen((o) => !o)}

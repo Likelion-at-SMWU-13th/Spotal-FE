@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import Camera from '@/assets/Camera.svg'
+import { toast } from 'sonner'
+import Limit from '@/assets/NoResult.svg?react'
 
 const sameImageList = (a = [], b = []) =>
   a.length === b.length && a.every((x, i) => x?.id === b[i]?.id && x?.src === b[i]?.src)
@@ -44,7 +46,7 @@ const ImageUploader = ({ urllist, onFilesChange, onRemove }) => {
   const handleUpload = (e) => {
     const uploaded = Array.from(e.target.files || [])
     if (images.length + uploaded.length > 10) {
-      alert('최대 10개까지 업로드할 수 있어요!')
+      toast('🟡 이미지는 최대 10개까지 업로드할 수 있어요!')
       return
     }
     const newItems = uploaded.map((f) => ({

@@ -11,12 +11,13 @@ const MemorySearchPage = () => {
   const [location, setLocation] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const { fetchRecommend2 } = useRecommend()
+  const currentUserId = localStorage.getItem('user.id')
 
   const handleNext = async () => {
     if (step === 0) setStep(1)
     else {
       setIsLoading(true)
-      const recommend = await fetchRecommend2(location, emotion)
+      const recommend = await fetchRecommend2(location, emotion, currentUserId)
       navigate('/recommended', {
         state: { placeData: recommend },
       })

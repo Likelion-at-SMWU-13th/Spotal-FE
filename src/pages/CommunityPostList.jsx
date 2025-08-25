@@ -31,8 +31,7 @@ const CommunityPostList = () => {
         const posts = Array.isArray(res.data?.data) ? res.data.data : []
         setPostData(posts)
       })
-      .catch((err) => {
-        console.log(err)
+      .catch(() => {
         setPostData([])
       })
   }

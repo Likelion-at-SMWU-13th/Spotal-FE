@@ -20,7 +20,7 @@ const StepSelector = ({ step, selected, onSelect, onNext, onPrev }) => {
         { name: '해방촌', num: 7 },
       ],
       src: Memory2,
-      button: '결과 보기',
+      button: '다음',
       highlight: Highlight2,
       highlightClass: 'absolute top-20 left-10 w-1/2 z-0', // step1 위치
     },
@@ -36,7 +36,7 @@ const StepSelector = ({ step, selected, onSelect, onNext, onPrev }) => {
         { name: '세심함', num: 6 },
       ],
       src: Memory1,
-      button: '다음',
+      button: '결과 보기',
       highlight: Highlight1,
       highlightClass: 'absolute top-20 w-1/3 text-start z-0', // step2 위치
     },
@@ -62,7 +62,7 @@ const StepSelector = ({ step, selected, onSelect, onNext, onPrev }) => {
         />
 
         <div className='grid justify-items-start ml-5 mb-12 z-10'>
-          <h2 className='whitespace-pre-line text-xl md:text-2xl lg:text-3xl mt-2 mb-1 font-extrabold text-gray-800 text-start z-10 font-[ExtraBlod]'>
+          <h2 className='whitespace-pre-line text-xl md:text-2xl lg:text-3xl mt-2 mb-1 text-gray-800 text-start z-10 font-[SemiBold]'>
             {currentStep.title}
           </h2>
           {currentStep.subtitle && (

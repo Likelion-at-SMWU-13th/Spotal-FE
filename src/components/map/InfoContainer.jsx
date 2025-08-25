@@ -6,12 +6,12 @@ import useRecommend from '@/hooks/useRecommend'
 const InfoContainer = ({ placeName, status, address, summary, tags = [], category, load }) => {
   const navigate = useNavigate()
   const { fetchRecommend } = useRecommend()
-
+  const currentUserId = localStorage.getItem('user.id')
   const isFoodIncluded = category?.includes('food') ?? false
 
   const goToRecommended = async () => {
     load(true)
-    const recommend = await fetchRecommend(placeName, address, tags)
+    const recommend = await fetchRecommend(placeName, address, tags, currentUserId)
     navigate('/recommended', {
       state: { placeData: recommend },
     })
@@ -20,9 +20,9 @@ const InfoContainer = ({ placeName, status, address, summary, tags = [], categor
     <div className='absolute bottom-[80px] left-1/2 -translate-x-1/2 w-[85%] max-w-[500px] bg-white rounded-[20px] shadow-lg p-6 z-[30]'>
       <button className='block bg-[#ADADAD] w-[134px] h-[5px] rounded-[10px] mx-auto mb-6'></button>
       <div className='flex justify-between items-center mb-2 bg-primary-300 pt-3 pb-3 pl-5 pr-5 rounded-[10px]'>
-        <h2 className='m-0 font-bold text-xl max-w-[44vw]'>{placeName}</h2>
+        <h2 className='m-0 font-[Bold] text-xl max-w-[44vw]'>{placeName}</h2>
         <span
-          className={`text-sm px-3 py-1 rounded-full border font-semibold select-none ${
+          className={`text-sm px-3 py-1 rounded-full border font-[SemiBold] select-none ${
             status === '폐업함'
               ? 'bg-[#FDF2F8] text-[#BE195D] border-[#BE195D]'
               : status === '이전함'

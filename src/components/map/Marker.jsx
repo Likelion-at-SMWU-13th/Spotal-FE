@@ -2,7 +2,16 @@ import { MapMarker } from 'react-kakao-maps-sdk'
 import Marker1 from '@/assets/Marker1.svg'
 import Marker2 from '@/assets/Marker2.svg'
 
-const Marker = ({ position, placeName, address, state, summary, emotion, category, onClick }) => {
+const Marker = ({
+  position,
+  placeName,
+  address,
+  state,
+  summary,
+  emotion,
+  category = null,
+  onClick,
+}) => {
   const markerSrc = state === '폐업함' ? Marker2 : Marker1
   return (
     <MapMarker

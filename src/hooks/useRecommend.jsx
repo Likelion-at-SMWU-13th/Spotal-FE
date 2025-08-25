@@ -1,19 +1,21 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { baseURL } from '@/pages/Signup'
 
 const useRecommend = () => {
   const [state, setStatus] = useState('idle')
 
-  const fetchRecommend = async (keyword, address, emotion) => {
+  const fetchRecommend = async (keyword, address, emotion, id) => {
     setStatus('loading')
 
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_API_BASE_URL}/api/places/`,
+        `${baseURL}/api/places/`,
         {
           name: keyword,
           address: address,
           emotion_tags: emotion,
+          user_id: id,
         },
 
         {
@@ -21,7 +23,6 @@ const useRecommend = () => {
         },
       )
       setStatus('success')
-      console.log(res.data)
       return res.data
     } catch (err) {
       setStatus('noResults')
@@ -29,15 +30,16 @@ const useRecommend = () => {
     }
   }
 
-  const fetchRecommend2 = async (location, emotion) => {
+  const fetchRecommend2 = async (location, emotion, id) => {
     setStatus('loading')
 
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_API_BASE_URL}/api/infer/create-session/`,
+        `${baseURL}/api/infer/create-session/`,
         {
           selected_location: location,
           selected_emotions: emotion,
+          user_id: id,
         },
 
         {
@@ -45,7 +47,6 @@ const useRecommend = () => {
         },
       )
       setStatus('success')
-      console.log(res.data)
       return res.data
     } catch (err) {
       setStatus('noResults')

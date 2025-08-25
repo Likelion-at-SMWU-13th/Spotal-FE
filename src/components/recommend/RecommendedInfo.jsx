@@ -1,7 +1,39 @@
 import React from 'react'
 import Close from '@/assets/Close.svg'
+import { useNavigate } from 'react-router-dom'
+import Button from '@/components/shared/Button'
+import useGelocation from '@/hooks/useGelocation'
 
 const RecommendedInfo = ({ placeName, status, address, summary, tags = [], image, onClose }) => {
+  const navigate = useNavigate()
+  const current = useGelocation()
+
+  const goToMap = () => {
+    const { kakao } = window
+    const geocoder = new kakao.maps.services.Geocoder()
+
+    geocoder.addressSearch(address, (result, resultStatus) => {
+      if (resultStatus === kakao.maps.services.Status.OK) {
+        const lat = result[0].y
+        const lng = result[0].x
+
+        const marker = {
+          title: placeName,
+          status,
+          address,
+          summary_card: summary,
+          emotions: tags,
+          lat,
+          lng,
+          previous_lng: current.lng,
+          previous_lat: current.lat,
+        }
+        navigate('/map', { state: { markers: [marker] } })
+      } else {
+      }
+    })
+  }
+
   return (
     <div className='fixed inset-0 bg-[rgba(173,173,173,0.5)] pt-[10vh] z-[1000]'>
       <div className='fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[85%] max-w-[400px] bg-white rounded-[20px] shadow-lg pt-4 p-6 z-[2000]'>
@@ -11,13 +43,13 @@ const RecommendedInfo = ({ placeName, status, address, summary, tags = [], image
 
         <img
           src={image}
-          className='bg-grey-100 w-[80vw] object-cover aspect-[10/10] rounded-[10px] mb-2'
+          className='bg-grey-100 w-[80vw] object-cover aspect-[10/8] rounded-[10px] mb-2'
         ></img>
 
         <div className='flex justify-between items-center mb-2 bg-primary-300 pt-3 pb-3 pl-5 pr-5 rounded-[10px]'>
-          <h2 className='m-0 font-bold text-xl max-w-[44vw]'>{placeName}</h2>
+          <h2 className='m-0 font-[Bold] text-xl max-w-[44vw]'>{placeName}</h2>
           <span
-            className={`text-sm px-3 py-1 rounded-full border font-semibold select-none ${
+            className={`text-sm px-3 py-1 rounded-full border font-[SemiBold] select-none ${
               status === '폐업함'
                 ? 'bg-[#FDF2F8] text-[#BE195D] border-[#BE195D]'
                 : status === '이전함'
@@ -49,6 +81,7 @@ const RecommendedInfo = ({ placeName, status, address, summary, tags = [], image
             ))}
           </div>
         </div>
+        <Button onClick={goToMap} type={'submit'} label={'지도에서 보기'}></Button>
       </div>
     </div>
   )

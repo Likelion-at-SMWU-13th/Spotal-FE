@@ -17,9 +17,6 @@ const CommunityMyPostList = () => {
     const params = url.searchParams
     if (emotionId != null) params.set('emotion_ids', emotionId)
     if (locationId != null) params.set('location_id', locationId)
-    console.log(url)
-    console.log(emotionId)
-    console.log(locationId)
 
     return url.toString()
   }
@@ -31,8 +28,7 @@ const CommunityMyPostList = () => {
         const posts = Array.isArray(res.data?.data) ? res.data.data : []
         setMyPostData(posts)
       })
-      .catch((err) => {
-        console.log(err)
+      .catch(() => {
         setMyPostData([])
       })
   }

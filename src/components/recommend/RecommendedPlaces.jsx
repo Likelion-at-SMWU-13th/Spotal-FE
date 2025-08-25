@@ -3,6 +3,7 @@ import BookMark from '@/assets/BookMark.svg'
 import BookMark2 from '@/assets/BookMark2.svg'
 import RecommendedInfo from './RecommendedInfo'
 import NoResult from '@/assets/NoResult.svg'
+import { baseURL } from '@/pages/Signup'
 import axios from 'axios'
 
 const RecommendedPlaces = ({
@@ -31,7 +32,7 @@ const RecommendedPlaces = ({
   const handleBookmark = (isMarked) => {
     if (!isMarked) {
       axios
-        .post(`${import.meta.env.VITE_API_BASE_URL}/api/places/saved/create/`, {
+        .post(`${baseURL}/api/places/saved/create/`, {
           shop: id,
           user: currentUserId,
           rec: rec,
@@ -43,7 +44,7 @@ const RecommendedPlaces = ({
         .catch((err) => console.log(err))
     } else {
       axios
-        .delete(`${import.meta.env.VITE_API_BASE_URL}/api/places/saved/${bookmarkID}/delete/`)
+        .delete(`${baseURL}/api/places/saved/${bookmarkID}/delete/`)
         .then((res) => {
           setIsMarked(false)
         })
@@ -58,7 +59,7 @@ const RecommendedPlaces = ({
         onClick={handleOpenInfo}
       >
         <img
-          src={image}
+          src={imgSrc}
           className='bg-grey-100 w-[80vw] object-cover aspect-[16/9] rounded-[10px] mb-2'
           onError={(e) => {
             e.currentTarget.src = NoResult
@@ -66,7 +67,7 @@ const RecommendedPlaces = ({
           }}
         ></img>
         <div className='flex justify-between items-center mb-2 pt-1 pl-1 rounded-[10px]'>
-          <h2 className='m-0 font-bold text-xl truncate max-w-[87%]'>{placeName}</h2>
+          <h2 className='m-0 font-[Bold] text-xl truncate max-w-[87%]'>{placeName}</h2>
           <img
             src={isMarked ? BookMark2 : BookMark}
             onClick={(e) => {

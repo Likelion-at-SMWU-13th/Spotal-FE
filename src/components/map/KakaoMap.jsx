@@ -28,7 +28,7 @@ const KakaoMap = ({ markers }) => {
   }
 
   const linePath =
-    markers.length && markers[0].status === '이전함' && markers[0].previous_lng != null
+    (markers.length && markers[0].status === '이전함') || markers[0].previous_lng != null
       ? useLoadPolyline({
           origin: `${markers[0].lng},${markers[0].lat}`,
           destination: `${markers[0].previous_lng},${markers[0].previous_lat}`,

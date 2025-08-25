@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import My from '@/assets/My.svg?react'
 import Home from '@/assets/Home.svg?react'
-import Community from '@/assets/Community.svg?react'
+import Explore from '@/assets/Explore.svg?react'
 
 const Footer = ({ selectedMenu = '' }) => {
   return (
@@ -10,7 +10,7 @@ const Footer = ({ selectedMenu = '' }) => {
         <Home className={selectedMenu === 'home' ? 'text-primary' : 'text-grey-200'} />
       </Link>
       <Link to={'/post'}>
-        <Community className={selectedMenu === 'community' ? 'text-primary' : 'text-grey-200'} />
+        <Explore className={selectedMenu === 'community' ? 'text-primary' : 'text-grey-200'} />
       </Link>
       <Link to={'/mypage'}>
         <My className={selectedMenu === 'my' ? 'text-primary' : 'text-grey-200'} />

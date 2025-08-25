@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Slider from 'react-slick'
+import PostDefaultImg from '@/assets/PostDefaultImg.svg'
 
 function ImageSlider({ urllist = [], w }) {
   const [current, setCurrent] = useState(0)
@@ -33,10 +34,9 @@ function ImageSlider({ urllist = [], w }) {
   }
 
   useEffect(() => {
-    if (!Array.isArray(urllist)) {
-      return
-    }
-    if (typeof urllist[0] === 'string') {
+    if (!Array.isArray(urllist) || urllist.length === 0) {
+      setImageUrlList([PostDefaultImg])
+    } else if (typeof urllist[0] === 'string') {
       setImageUrlList(urllist)
     } else if (typeof urllist[0] === 'object' && urllist[0]?.image_url) {
       setImageUrlList(urllist.map((u) => u.image_url))
@@ -56,8 +56,8 @@ function ImageSlider({ urllist = [], w }) {
           >
             <div className='justify-center items-center [&>div]:rounded-[10px] [&>div]:overflow-hidden'>
               <img
-                className='object-cover bg-grey-100 rounded-[10px] overflow-hidden'
-                style={{ width: w, height: w }}
+                className='object-cover bg-grey-100 rounded-[10px] overflow-hidden aspect-square'
+                style={{ width: w }}
                 alt='골목 과거 사진'
                 src={url}
                 loading='lazy'
