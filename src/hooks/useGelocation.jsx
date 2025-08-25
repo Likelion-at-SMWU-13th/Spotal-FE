@@ -33,7 +33,7 @@ const useGeolocation = () => {
       {
         enableHighAccuracy: false,
         maximumAge: 5000,
-        timeout: 5000,
+        timeout: 600000,
       },
     )
 

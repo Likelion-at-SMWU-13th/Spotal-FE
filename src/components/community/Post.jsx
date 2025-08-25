@@ -72,12 +72,12 @@ const Post = ({ text, urllist, emotionTags, locationTags, memory_id, userId, nic
       <div className='h-auto'>
         <ImageSlider w='68.974vw' urllist={urllist} />
       </div>
-      <div className='h-auto m-0 my-1'>
+      <div className='flex items-baseline gap-[5px] h-auto m-0 my-1'>
         <p className='whitespace-pre-line text-[12px]'>{displayedText}</p>
         <div className='h-auto'>
-          {text.length > 25 && (
+          {text.length > 25 && !expanded && (
             <button
-              className='text-grey-300 ml-[0.1rem] break-keep text-[12px]'
+              className='text-grey-300 ml-[0.1rem] break-keep text-[12px] cursor-pointer'
               onClick={() => setExpanded(true)}
             >
               {expanded ? '' : '더보기'}

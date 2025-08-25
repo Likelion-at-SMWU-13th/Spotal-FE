@@ -30,9 +30,9 @@ const Mypage = () => {
         className='absolute top-[19.312vh] right-[7.5vw] md:right-[3.3rem] transform -translate-y-1/2 w-[25.64vw] h-[25.64vw] md:w-[11rem] md:h-[11rem] rounded-full bg-primary-200 border-[2px] border-white'
         src={DefaultImg}
       />
-      <div className='flex flex-col gap-[1.57vh] w-full h-[18.25vh] pl-[30px]'>
+      <div className='flex flex-col gap-[1.57vh] w-full h-[22vh] pl-[30px]'>
         <h3 className='mt-[4.74vh] font-[Bold] text-[24px]'>{userInfo?.user?.nickname ?? ''}</h3>
-        <p className='text-[1rem] whitespace-pre-line'>
+        <p className='text-[1rem] whitespace-pre-line pb-[2rem]'>
           {userInfo?.user?.detail?.trim() === ''
             ? '당신의 기억을 따라가다 보면.. \n 어느새 당신의 취향과 마주하게 될 거예요!'
             : userInfo?.user?.detail}

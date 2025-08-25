@@ -5,6 +5,7 @@ import RecommendedInfo from './RecommendedInfo'
 import NoResult from '@/assets/NoResult.svg'
 import { baseURL } from '@/pages/Signup'
 import axios from 'axios'
+import useGelocation from '@/hooks/useGelocation'
 
 const RecommendedPlaces = ({
   id,
@@ -21,6 +22,7 @@ const RecommendedPlaces = ({
   const [bookmarkID, setBookmarkId] = useState()
   const [imgSrc, setImgSrc] = useState(image || NoResult)
   const currentUserId = localStorage.getItem('user.id')
+  const current = useGelocation()
 
   const handleOpenInfo = () => {
     setIsInfoOpen(true)
@@ -90,6 +92,7 @@ const RecommendedPlaces = ({
       </div>
       {isInfoOpen && (
         <RecommendedInfo
+          current={current}
           placeName={placeName}
           status={status}
           address={address}

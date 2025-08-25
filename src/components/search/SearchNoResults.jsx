@@ -8,7 +8,7 @@ const SearchNoResults = ({ onClose }) => {
     <div className='fixed inset-0 bg-[rgba(173,173,173,0.5)] z-[1000] flex items-center justify-center'>
       <div className='bg-white rounded-[20px] shadow-lg p-6 w-[85%] max-w-[400px] flex flex-col items-center'>
         <div className='self-end mb-[1vh]'>
-          <img src={Close} onClick={onClose} className='cursor-pointer w-[6vw] h-[6vh] mr-[2vw]' />
+          <img src={Close} onClick={onClose} className='cursor-pointer mr-[1vw]' />
         </div>
         <h1 className='text-center text-xl font-[Bold] mb-[2vh]'>
           찾으시는 장소를 발견하지 못했어요
