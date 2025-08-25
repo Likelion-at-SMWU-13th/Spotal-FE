@@ -23,7 +23,6 @@ const ImageUploader = ({ urllist, onFilesChange, onRemove }) => {
 
   useEffect(() => {
     if (!urllist) return
-    console.log(urllist)
     const normalized = (Array.isArray(urllist) ? urllist : [])
       .map((u) => {
         const src = typeof u === 'string' ? u : (u?.image_url ?? u?.src)

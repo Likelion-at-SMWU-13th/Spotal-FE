@@ -24,7 +24,6 @@ const Post = ({ text, urllist, emotionTags, locationTags, memory_id, userId, nic
         if (cancelled) return
         if (marked && sameUser) {
           SetIsMarked(true)
-          console.log(res)
           SetBookmarkId(marked.bookmark_id)
         } else {
           SetIsMarked(false)
@@ -49,8 +48,6 @@ const Post = ({ text, urllist, emotionTags, locationTags, memory_id, userId, nic
         .then((res) => {
           SetIsMarked(true)
           SetBookmarkId(res.data.bookmark_id)
-          console.log(res.data)
-          console.log(res.data.bookmark_id)
         })
         .catch((err) => console.log(err))
     } else {

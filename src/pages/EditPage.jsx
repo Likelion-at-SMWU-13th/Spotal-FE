@@ -9,6 +9,7 @@ import { useFormFilled } from '@/hooks/useFormFilled'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { baseURL } from './Signup'
+import { toast } from 'sonner'
 
 const EditPage = () => {
   const labelClass = 'font-[Medium] text-[1rem]'
@@ -19,6 +20,7 @@ const EditPage = () => {
   const [files, setFiles] = useState([])
   const navigate = useNavigate()
   const dropdownRef = useRef(null)
+  const [submitting, setSubmitting] = useState(false)
 
   const scrollTo = () => {
     const dropdown = dropdownRef.current
@@ -37,9 +39,7 @@ const EditPage = () => {
     axios
       .get(`${baseURL}/community/memories/${memory_id}/`)
       .then((res) => {
-        console.log('데이터', res.data.data)
         setData(res.data.data)
-        console.log(data)
       })
       .catch((err) => {
         console.log(err)
@@ -77,6 +77,11 @@ const EditPage = () => {
   }, [data, setValues])
 
   const patchEditRequest = () => {
+    if (submitting) {
+      toast('🟡 수정중입니다')
+      return
+    }
+    setSubmitting(true)
     const formData = new FormData()
     formData.append('content', values.text)
     ;(values.emotion ?? []).forEach((id) => {
@@ -88,18 +93,16 @@ const EditPage = () => {
     const flatFiles = (files ?? []).flat()
     flatFiles.filter((f) => f instanceof File).forEach((f) => formData.append('images', f))
     formData.append('user_id', localStorage.getItem('user.id'))
-    for (let pair of formData.entries()) {
-      console.log(pair[0], pair[1])
-    }
     axios
       .patch(`${baseURL}/community/memories/${memory_id}/`, formData)
       .then((res) => {
-        console.log(res)
         navigate('/post')
       })
       .catch((err) => {
-        console.log('status', err.response?.status)
-        console.log('body', err.response?.data)
+        console.log(err)
+      })
+      .finally(() => {
+        setSubmitting(false)
       })
   }
 
@@ -117,7 +120,6 @@ const EditPage = () => {
                     urllist={images}
                     onFilesChange={setFiles}
                     onRemove={(id) => {
-                      console.log(id)
                       axios.delete(`${baseURL}/community/images/${id}/`).then((res) => {
                         setImages((prev) => prev.filter((img) => img.image_id !== id))
                       })
@@ -163,7 +165,7 @@ const EditPage = () => {
                 </div>
                 <Button
                   type={'button'}
-                  label={'작성 완료'}
+                  label={'수정 완료'}
                   disabled={!isFilled}
                   onClick={patchEditRequest}
                 />

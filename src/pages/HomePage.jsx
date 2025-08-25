@@ -61,7 +61,7 @@ const HomePage = () => {
         />
         <button
           onClick={() => goToMap(keyword)}
-          className='flex justify-center items-center min-w-[40px] h-[4vh] rounded-[12px] bg-primary px-2'
+          className='flex justify-center items-center cursor-pointer min-w-[40px] h-[4vh] rounded-[12px] bg-primary px-2'
         >
           <img src={Search} alt='검색 버튼' />
         </button>
@@ -69,7 +69,7 @@ const HomePage = () => {
 
       <SearchResults keyword={keyword} goToMap={goToMap} />
 
-      <div className='fixed bottom-0 left-1/2 transform -translate-x-1/2 mb-[120px] flex flex-col items-center justify-center w-full max-w-[768px]'>
+      <div className='cursor-pointer fixed bottom-0 left-1/2 transform -translate-x-1/2 mb-[120px] flex flex-col items-center justify-center w-full max-w-[768px]'>
         <img src={Arrow} onClick={handleToggle} />
         <p className='mt-4 text-base md:text-lg text-grey-200'>화살표를 눌러 기억을 꺼내보세요</p>
       </div>
@@ -77,7 +77,7 @@ const HomePage = () => {
       <div
         onClick={goToMemory}
         className={`
-          fixed bottom-0 left-1/2 transform -translate-x-1/2 mb-[120px] flex flex-col items-center justify-center z-[30]
+          cursor-pointer fixed bottom-0 left-1/2 transform -translate-x-1/2 mb-[120px] flex flex-col items-center justify-center z-[30]
           h-[15vh] w-[85%] mx-auto max-w-[500px] bg-[#FEF1DA] border border-primary rounded-[7px]
           transition-transform duration-500 ease-out
           ${isToggle ? 'translate-y-0 opacity-100 visible' : 'translate-y-full opacity-0 invisible'}

@@ -1,10 +1,16 @@
 import { useState, useEffect } from 'react'
 
-const useGelocation = () => {
-  const [location, setLocation] = useState({
-    lat: null,
-    lng: null,
-  })
+const STORAGE_KEY = 'current_location'
+
+const useGeolocation = () => {
+  const savedLocation = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null')
+
+  const [location, setLocation] = useState(
+    savedLocation || {
+      lat: 37.53609444,
+      lng: 126.9675222,
+    },
+  )
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -14,24 +20,27 @@ const useGelocation = () => {
 
     const watchId = navigator.geolocation.watchPosition(
       (pos) => {
-        setLocation({
+        const newLocation = {
           lat: pos.coords.latitude,
           lng: pos.coords.longitude,
-        })
+        }
+        setLocation(newLocation)
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(newLocation))
       },
-      (err) => {},
+      (err) => {
+        console.error('위치 정보 오류:', err)
+      },
       {
-        enableHighAccuracy: true,
-        maximumAge: 0,
-        timeout: 10000,
+        enableHighAccuracy: false,
+        maximumAge: 5000,
+        timeout: 5000,
       },
     )
 
-    return () => {
-      navigator.geolocation.clearWatch(watchId)
-    }
+    return () => navigator.geolocation.clearWatch(watchId)
   }, [])
+
   return location
 }
 
-export default useGelocation
+export default useGeolocation

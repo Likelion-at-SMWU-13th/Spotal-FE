@@ -22,7 +22,7 @@ const StepSelector = ({ step, selected, onSelect, onNext, onPrev }) => {
       src: Memory2,
       button: '다음',
       highlight: Highlight2,
-      highlightClass: 'absolute top-20 left-10 w-1/2 z-0', // step1 위치
+      highlightClass: 'absolute top-20 left-10 w-1/2 z-0',
     },
     {
       title: '그 때 어떤 감정을 느꼈나요?',
@@ -38,7 +38,7 @@ const StepSelector = ({ step, selected, onSelect, onNext, onPrev }) => {
       src: Memory1,
       button: '결과 보기',
       highlight: Highlight1,
-      highlightClass: 'absolute top-20 w-1/3 text-start z-0', // step2 위치
+      highlightClass: 'absolute top-20 w-1/3 text-start z-0',
     },
   ]
 
@@ -78,7 +78,7 @@ const StepSelector = ({ step, selected, onSelect, onNext, onPrev }) => {
             return (
               <button
                 key={option.name}
-                className={`px-4 py-2 text-base max-w-[100px] md:text-lg rounded-full border transition-colors duration-200 ${
+                className={`cursor-pointer px-4 py-2 text-base max-w-[100px] md:text-lg rounded-full border transition-colors duration-200 ${
                   isSelected
                     ? 'bg-[#FFF8EC] border-[#FFBA42] text-[#FFBA42]'
                     : 'bg-white border-[#ADADAD] text-[#828282]'
@@ -99,7 +99,7 @@ const StepSelector = ({ step, selected, onSelect, onNext, onPrev }) => {
           <button
             onClick={onNext}
             disabled={selected.length === 0}
-            className={`absolute left-1/2 transform -translate-x-1/2 w-[85%] max-w-[768px] h-14 rounded-lg text-center transition-colors duration-200 z-10 ${
+            className={`cursor-pointer absolute left-1/2 transform -translate-x-1/2 w-[85%] max-w-[768px] h-14 rounded-lg text-center transition-colors duration-200 z-10 ${
               selected.length === 0
                 ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
                 : 'bg-primary text-white hover:bg-primary'

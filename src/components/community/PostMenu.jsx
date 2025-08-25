@@ -17,13 +17,11 @@ const PostMenu = ({ memory_id }) => {
   const deletePost = () => {
     axios
       .delete(`${baseURL}/community/memories/${memory_id}/`)
-      .then((response) => {
-        console.log(response)
+      .then(() => {
         toast('🟢 게시글 삭제가 완료되었습니다.')
         window.location.reload()
       })
       .catch((error) => {
-        console.log(error)
         toast('🔴 게시글을 삭제하지 못하였습니다.')
       })
   }

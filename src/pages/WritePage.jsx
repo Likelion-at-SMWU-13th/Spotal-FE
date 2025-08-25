@@ -9,6 +9,7 @@ import { useFormFilled } from '@/hooks/useFormFilled'
 import { baseURL } from './Signup'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
 
 const WritePage = () => {
   const labelClass = 'font-[Medium] text-[1rem]'
@@ -17,6 +18,7 @@ const WritePage = () => {
   const [files, setFiles] = useState([])
   const navigate = useNavigate()
   const dropdownRef = useRef(null)
+  const [submitting, setSubmitting] = useState(false)
 
   const scrollTo = () => {
     const dropdown = dropdownRef.current
@@ -32,6 +34,11 @@ const WritePage = () => {
   })
 
   const postWriteRequest = () => {
+    if (submitting) {
+      toast('🟡 제출중입니다')
+      return
+    }
+    setSubmitting(true)
     const formData = new FormData()
     formData.append('content', values.text)
     ;(values.emotion ?? []).forEach((id) => {
@@ -45,16 +52,16 @@ const WritePage = () => {
     const flatFiles = (files ?? []).flat()
     flatFiles.filter((f) => f instanceof File).forEach((f) => formData.append('images', f))
     formData.append('user_id', localStorage.getItem('user.id'))
-    console.log('images:', files)
     axios
       .post(`${baseURL}/community/memories/`, formData)
       .then((res) => {
-        console.log(res)
         navigate(-1)
       })
       .catch((err) => {
-        console.log('status', err.response?.status)
-        console.log('body', err.response?.data)
+        console.log(err)
+      })
+      .finally(() => {
+        setSubmitting(false)
       })
   }
 
